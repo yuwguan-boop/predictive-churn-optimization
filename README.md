@@ -4,17 +4,18 @@
 ![Data Science](https://img.shields.io/badge/Data_Science-Data_Driven-🚀?style=for-the-badge&color=blue)
 ![Business Analytics](https://img.shields.io/badge/Business-ROI_Optimization-🟢?style=for-the-badge&color=brightgreen)
 
-Este proyecto resuelve de extremo a extremo la problemática de la fuga de clientes (*churn*) en el sector de las telecomunicaciones. La aportación principal es demostrar la **Paradoja del Recall**: cómo el modelo con mejores métricas estadísticas teóricas (*Árbol de Decisión*) puede destruir margen comercial si no se calibra correctamente, y cómo un enfoque probabilístico continuo logra optimizar el **ROI real** de la empresa.
+Este proyecto resuelve de extremo a extremo la problemática de la fuga de clientes (*churn*) en el sector de las telecomunicaciones. La aportación principal es encontrar el equilibrio óptimo entre sensibilidad matemática y eficiencia comercial: demostrando cómo el modelo con mejor rendimiento estadístico tradicional (Árbol de Decisión) reduce el margen de beneficio por su rigidez para calibrar umbrales de riesgo, y cómo un enfoque probabilístico continuo logra optimizar el ROI real de la organización.
 
 ---
 
-## 🎯 1. El Reto de Negocio: Evitar el "Gasto Inútil"
+## 🎯 1. Contexto y Problema de Negocio
 
-Las campañas tradicionales de retención lanzan descuentos masivos de forma indiscriminada. Esto genera un problema financiero crítico:
-* **Falsos Positivos:** El modelo clasifica como "en riesgo" a un cliente que en realidad es fiel.
-* **Impacto Financiero:** La empresa regala un descuento innecesario, canibalizando sus propios ingresos y destruyendo el margen comercial.
+Tradicionalmente, las empresas mitigan la fuga de clientes lanzando campañas masivas de fidelización (descuentos indiscriminados). Esto genera un problema financiero crítico debido a la sensibilidad y rigidez de los modelos predictivos tradicionales:
 
-**Solución:** Este proyecto implementa una **Simulación Económica Bidimensional** que calibra en tiempo real tanto el incentivo comercial óptimo como el umbral de riesgo exacto para maximizar el beneficio neto.
+* **El problema de los Falsos Positivos (FP):** Clasificar erróneamente a un cliente fiel como "en riesgo de fuga".
+* **El impacto financiero:** Activar una campaña bajo este criterio implica regalar descuentos innecesarios a usuarios que se iban a quedar de todos modos, destruyendo el margen comercial.
+
+Este proyecto resuelve dicha rigidez mediante un flujo de trabajo que conecta la analítica predictiva con una **Simulación Económica Bidimensional**, calibrando de forma simultánea el incentivo ideal y el umbral de riesgo óptimo.
 
 ---
 
@@ -49,8 +50,8 @@ Se entrenaron y optimizaron múltiples arquitecturas utilizando `GridSearchCV` e
 
 * 🌲 **Árbol de Decisión (Máximo Recall):** Optimizado con una profundidad muy corta (`max_depth=3`). Evita por completo el sobreajuste, capturando el mayor volumen de positivos reales, pero su naturaleza binaria ofrece poca flexibilidad.
 * 📈 **Regresión Logística:** Potenciada con regularización Lasso (`L1`). Actúa como un filtro interno reduciendo a cero el peso de las variables irrelevantes para concentrar el poder predictivo en los factores críticos.
-* 🤖 **Random Forest:** Configurado como un ensamblado compacto (50 árboles) para neutralizar el ruido estático de la agregación estocástica.
-
+* 🤖 **Random Forest:** Configurado con un número controlado de estimadores (50 árboles) para construir un modelo ágil y estable, evitando que la complejidad matemática genere patrones falsos o sobreajuste (overfitting).
+  
 En capacidad discriminante global (**Métrica AUC**), la **Regresión Logística** y el **Random Forest** lideraron la ordenación de la cartera, demostrando el mejor equilibrio entre detección y control de falsos positivos.
 
 ---
@@ -59,7 +60,7 @@ En capacidad discriminante global (**Métrica AUC**), la **Regresión Logística
 
 Para validar el proyecto ante la dirección general, se construyó un simulador monetario basado en dos premisas reales de la **econometría del marketing**:
 1. **Elasticidad de la Retención:** La probabilidad de éxito de la oferta sigue una función de saturación exponencial no lineal según el descuento otorgado.
-2. **Optimización Dinámica:** Se iteraron los umbrales de decisión (del 40% al 85%) y los niveles de descuento (del 5% al 100%) para evaluar el **Impacto Económico Mensual** mediante la siguiente ecuación de negocio:
+2. **Optimización Dinámica:** Se iteraron los umbrales de decisión y los niveles de descuento para evaluar el **Impacto Económico Mensual** mediante la siguiente ecuación de negocio:
 
 $$\text{Impacto} = (\text{Cargos}_{TP} \cdot P_{\text{éxito}}) \cdot (1 - \text{desc}) - (\text{Cargos}_{FP} \cdot \text{desc})$$
 
@@ -80,7 +81,7 @@ $$\text{Impacto} = (\text{Cargos}_{TP} \cdot P_{\text{éxito}}) \cdot (1 - \text
 
 El proyecto demostró un valioso enfoque de negocio: **las mejores métricas estadísticas no siempre equivalen a la mayor rentabilidad**. 
 
-* **La limitación del Árbol de Decisión:** Aunque matemáticamente era un modelo excelente con el *Recall* más alto, su estructura rígida de saltos binarios le impidió ajustar finamente su probabilidad, quedando estancado en un umbral del 48%. Al ser incapaz de filtrar con precisión, saturó la campaña con **Falsos Positivos**, regalando márgenes comerciales a clientes fieles que no pensaban marcharse.
+* **La limitación del Árbol de Decisión:** A pesar de registrar el *Recall* más alto del estudio, el Árbol de Decisión adolece de una marcada rigidez estructural. En lugar de ofrecer una escala fluida de riesgos, agrupa a la cartera de clientes en grandes bloques homogéneos de probabilidad. Esta falta de resolución fina impidió al algoritmo actuar como un "bisturí financiero", forzando al optimizador de negocio a estancarse en un umbral del 48%. Al no poder filtrar con precisión milimétrica dentro de esos bloques, la campaña absorbió un volumen excesivo de Falsos Positivos, diluyendo el margen comercial al regalar incentivos a clientes que no tenían intención real de abandonar la empresa.
 * **El éxito de Regresión Logística y Random Forest:** Su distribución de probabilidad fluida actuó como un **"bisturí financiero"**. Permitió elevar el umbral de exigencia al **55%**. Al volverse más estrictos, descartaron a los clientes estables antes de activar la oferta, concentrando los recursos de marketing *únicamente* donde generaban un retorno neto positivo, rescatando más de **$43,000 mensuales**.
 
 ---
