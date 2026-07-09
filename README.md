@@ -64,8 +64,8 @@ Para validar el proyecto ante la dirección general, se construyó un simulador 
 $$\text{Impacto} = (\text{Cargos}_{TP} \cdot P_{\text{éxito}}) \cdot (1 - \text{desc}) - (\text{Cargos}_{FP} \cdot \text{desc})$$
 
 > 💡 **¿Qué significa esta fórmula para el negocio?**
-> * **El beneficio (Parte izquierda):** Suma los cargos mensuales de las bajas reales que logramos salvar ($\text{Cargos}_{\text{TP}}$), multiplicados por la probabilidad de que acepten la oferta ($P_{\text{éxito}}$) e ingresando ese dinero con el descuento ya aplicado $(1 - \text{desc})$.
-> * **El coste (Parte derecha):** Resta el "dinero regalado" a los clientes que el modelo marcó como bajas por error pero que en realidad eran fieles ($\text{Cargos}_{\text{FP}}$), multiplicado por el descuento que les dimos $(\text{desc})$.
+> * **El beneficio (Parte izquierda):** Suma los cargos mensuales de las bajas reales que logramos salvar ($Cargos_{TP}$), multiplicados por la probabilidad de que acepten la oferta ($P_{exito}$) e ingresando ese dinero con el descuento ya aplicado $(1 - desc)$.
+> * **El coste (Parte derecha):** Resta el "dinero regalado" a los clientes que el modelo marcó como bajas por error pero que en realidad eran fieles ($Cargos_{FP}$), multiplicado por el descuento que les dimos $(desc)$.
 
 ### 📈 Tabla de Rendimiento y Óptimo Económico
 
