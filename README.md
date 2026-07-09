@@ -1,6 +1,6 @@
 # 📊 Optimización Económica de Campañas de Retención (*Churn*) mediante Machine Learning
 
-Este repositorio contiene el desarrollo completo de mi **Trabajo de Fin de Grado (TFG)** para el Grado en Estadística Empresarial en la Universidad Miguel Hernández (Nota Media del expediente: 9,32). El proyecto aborda la problemática de la fuga de clientes (*churn*) en el sector de las telecomunicaciones desde una perspectiva dual: el modelado predictivo avanzado y la optimización financiera de los recursos de la empresa.
+El proyecto aborda la problemática de la fuga de clientes (*churn*) en el sector de las telecomunicaciones desde una perspectiva dual: el modelado predictivo avanzado y la optimización financiera de los recursos de la empresa.
 
 ---
 
