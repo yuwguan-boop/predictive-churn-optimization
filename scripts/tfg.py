@@ -651,65 +651,6 @@ plt.xlabel('Clasificación del Modelo', fontweight='bold')
 plt.tight_layout()
 plt.show()
 
-
-# # =============================================================================
-# # --- 5.8. SIMULACIÓN ECONÓMICA COMPLETA Y VISUALIZACIÓN ---
-# # =============================================================================
-# print("\n--- GENERANDO SIMULACIÓN ECONÓMICA Y GRÁFICOS ---")
-
-# plt.figure(figsize=(12, 8))
-
-# modelos_a_simular = [
-#     ('Regresión Logística Óptima', 'Regresión Logística'),
-#     ('Árbol de Decisión Óptimo', 'Árbol de Decisión'),
-#     ('Random Forest Óptimo', 'Random Forest'),
-#     ('SVM Óptimo', 'SVM')
-# ]
-
-# for clave_modelo, nombre_legible in modelos_a_simular:
-#     modelo_negocio = mejores_modelos[clave_modelo]
-#     y_pred_negocio = cross_val_predict(modelo_negocio, X_scaled, y, cv=skf)
-
-#     # Cálculo de grupos
-#     TP_mask = (y == 1) & (y_pred_negocio == 1)
-#     FP_mask = (y == 0) & (y_pred_negocio == 1)
-#     cargos_TP = df_clean.loc[TP_mask, 'MonthlyCharges'].sum()
-#     cargos_FP = df_clean.loc[FP_mask, 'MonthlyCharges'].sum()
-
-#     descuentos = [d / 100 for d in range(5, 101)]
-#     impactos = []
-    
-#     mejor_desc_modelo = 0
-#     max_impacto_modelo = -float('inf')
-
-#     for d in descuentos:
-#         # Probabilidad de éxito: a más descuento, más retención-->función exponencial
-#         tasa_retencion = (1 - math.exp(-6 * d)) 
-        
-#         # Fórmula: (Ingreso salvado descontado) - (Pérdida por falsos positivos)
-#         ingreso_recuperado = (cargos_TP * tasa_retencion) * (1 - d)
-#         perdida_falsos_fieles = cargos_FP * d
-#         impacto_neto = ingreso_recuperado - perdida_falsos_fieles
-        
-#         impactos.append(impacto_neto)
-        
-#         if impacto_neto > max_impacto_modelo:
-#             max_impacto_modelo = impacto_neto
-#             mejor_desc_modelo = int(d*100)
-
-#     print(f"{nombre_legible}: Óptimo al {mejor_desc_modelo}% (Max: ${max_impacto_modelo:,.2f})")
-
-#     plt.plot([d*100 for d in descuentos], impactos, label=f'{nombre_legible} (Máx al {mejor_desc_modelo}%)', lw=2)
-
-# plt.axhline(0, color='black', linestyle='--', alpha=0.5) # Línea de "no perder dinero"
-# plt.title('Impacto Económico Neto según % de Descuento', fontsize=14, fontweight='bold')
-# plt.xlabel('% de Descuento aplicado', fontsize=12)
-# plt.ylabel('Impacto Económico Mensual ($)', fontsize=12)
-# plt.grid(True, alpha=0.3)
-# plt.legend()
-# plt.tight_layout()
-# plt.show()
-
 # =============================================================================
 # --- 5.8. SIMULACIÓN ECONÓMICA COMPLETA CON OPTIMIZACIÓN DE UMBRALES ---
 # =============================================================================
